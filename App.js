@@ -1,16 +1,13 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
+ * KARMA v.1
+ * author: patrisor, alkozma
  */
 
 /**
  * Importing different libraries
  */
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {TouchableOpacity, Alert, Button, Platform, StyleSheet, Text, View} from 'react-native';
 
 /**
  * Header: Arrow function which is stored in a parameterless function declaration
@@ -19,63 +16,114 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
  */
 export const Header = () => (
   <View style={styles.header}>
-    <Text style={styles.text}>KARMA</Text> 
+    <Text style={styles.text}>KARMA v.1</Text> 
   </View> 
 );
 
-/**
- * TODO: Create custom footer
- * same color as header: #00FFFF
- */
-
-/** TODO: Delete
- * You call this set of instructions to play with the User Interface Platform module
-const instructions = Platform.select({
-  ios: 	
-  	'Press Cmd+R to reload,\n' + 
-   	'Cmd+D or shake for dev menu\n' + 
-	'Clubber iPhone on top of head for one trip to hell',
-  android:
-  	'Double tap R on your keyboard to reload,\n' +
-	'Shake or press menu button for dev menu,\n' + 
-	'Clubber android on top of head for one trip to hell',
-});
-*/
+// TODO: Logic to keep iterating a number by 1 then converting it into a string and back
+export const onPressButton = () => {
+ this.setState({number: this.state.number + 1})
+}
 
 /**
- * My main function
+ * My main Class
  */
 type Props = {};
 export default class App extends Component<Props> {
+  
+  // Constructor
+  constructor() {
+   super()
+   this.state = {
+    number: 0
+   }
+  }
+  
+  // Main Function
   render() {
-    return (
+   return [
+      // Header
       <View>
-        <Header> 
-	  leftComponent={{icon: 'menu', color: '#ffffff'}}
-	  centerComponent={{text: 'KARMA', style: { color: '#ffffff'} }}
-	  rightComponent={{icon: 'home', color: '#ffffff'}} 
-	</Header>
+        <Header>{}</Header>
+      </View>,
+      // Button
+      <TouchableOpacity style={styles.button}>
+	<Text></Text>
+      </TouchableOpacity>,
+      // Footer
+      <View style={styles.footer}>{}</View>,
+      // Text on top of the screen
+      <View style={styles.counterView}>
+        <Text style={styles.counter}>{this.state.number.toString()}</Text>
+      </View>
+    ];
+
+   /* TODO: Convert what you have above (render() returns an array of individually created
+            objects) into this format for return \/
+    return (
+      <View style={styles.container}>
+        // Header
+        <View>
+          <Header>{}</Header>
+        </View>
+        // Button
+        <View style={styles.button}>
+          <Button title="KARMA"/>
+        </View>
+        // Footer
+        <View style={styles.footer}>{}</View>
       </View>
     );
+    */
   }
 }
 
 /**
- * Edit the types of styles available for the text view 
+ * Edit the types of styles available for the current state of your objects
  * iPhone -> height: 76, marginTop: 24
  * Android -> height: 100, marginTop: 0
  */
 const styles = StyleSheet.create({
-  // TODO: Decide if you do not need and delete
   header: {
    height: Platform.OS === 'android' ? 76 : 100,
-   marginTop: Platform.OS === 'ios' ? 0 : 24,
+   marginTop: Platform.OS === 'ios' ? 0 : 4,
    backgroundColor: '#00ffff',
    alignItems: 'center',
    justifyContent: 'center'
   },
+  footer: {
+   flex: 1,
+   width: '100%',
+   height: 30,
+   backgroundColor: '#00ffff',
+   position: 'absolute',
+   bottom: 0
+  },
   text: {
    color: '#ffffff',
-   fontSize: 24
+   fontSize: 35,
+   top: 25
+  },
+  button: {
+   // Attributes
+   backgroundColor: '#00ffff',
+   borderColor: '#00B3B3',
+   borderWidth: 5,
+   height: 150,
+   width: 150,
+   // Use absolute position to put objects wherever you want
+   position: 'absolute',
+   bottom: 50,
+   alignSelf: 'center',
+  },
+  counterView: {
+   // Position
+   alignSelf: 'center',
+   top: 25
+  },
+  counter: {
+   color: '#00ffff',
+   fontSize: 50,
+   fontWeight: 'bold',
   }
 });
